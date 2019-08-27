@@ -204,7 +204,7 @@
             <td>{{$value.role == 'admin' ? '超级管理员' : '普通用户'}}</td>
             <td class="text-center" data-id="{{$value._id}}">
                 <a href="javascript:;" class="btn btn-default btn-xs edit">编辑</a>
-                <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+                <a href="javascript:;" class="btn btn-danger btn-xs delete">删除</a>
             </td>
         </tr>
         {{/each}}
@@ -366,6 +366,29 @@
                 }
             })
         });
+
+
+        // 给删除按钮注册点击事件
+        $('tbody').on('click', '.delete', function() {
+            // console.log('ok');
+
+            if (confirm("你真的要删除吗？")) {
+                var id = $(this).parent().attr('data-id')
+
+                //发送ajax请求
+                $.ajax({
+                    url: '/users/' + id,
+                    type: 'delete',
+                    success: function(res) {
+                        // 返回的是一个对象 然后根据这个对象去userAee数组中将对对应的索引找到 然后调用splice()
+                        //  要调用render方 重新渲染
+                        var index = userArr.findIndex(item => item._id == res._id);
+                        userArr.splice(index, 1);
+                        render(userArr);
+                    }
+                })
+            }
+        })
     </script>
 
 
