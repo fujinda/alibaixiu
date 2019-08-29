@@ -168,6 +168,15 @@
                 })
             }
         });
+        // 向服务器端发送请求 索要登录用户信息
+        $.ajax({
+            type: 'get',
+            url: '/users/' + userId,
+            success: function(response) {
+                $('.avatar').attr('src', response.avatar)
+                $('.profile .name').html(response.nickName)
+            }
+        })
 
 
         // 给文件域绑定 change 事件，创建 FormData 对象，实现文件上传

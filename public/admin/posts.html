@@ -197,6 +197,18 @@
                 })
             }
         });
+        // 向服务器端发送请求 索要登录用户信息
+        $.ajax({
+            type: 'get',
+            url: '/users/' + userId,
+            success: function(response) {
+                $('.avatar').attr('src', response.avatar)
+                $('.profile .name').html(response.nickName)
+            }
+        })
+
+
+
         // 显示所有的文章  
         /*
         1.需要向服务器发起请求 
