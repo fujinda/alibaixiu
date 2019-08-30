@@ -28,9 +28,7 @@ $.ajax({
     type: 'get',
     url: '/categories',
     success: function(response) {
-        console.log(response);
-
-
+        // console.log(response);
         var navTpl = `
 			{{each data}}
 			<li>
@@ -41,7 +39,7 @@ $.ajax({
 			{{/each}}
 		`;
         var html = template.render(navTpl, { data: response });
-        console.log(html);
+        // console.log(html);
 
         $('#navBox').html(html)
         $('#topNavBox').html(html)
